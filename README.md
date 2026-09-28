@@ -47,11 +47,25 @@ Correctness tests verify arithmetic and specified behavior; they do not validate
 ## Architecture
 `research/core.py` contains the baseline. `research/api.py` validates requests and calls it. Tests are independent of the website. Training, persisted artifacts, and external data ingestion remain future work.
 
-## Git publication
-This directory has been initialized locally as a Git repository in the working environment. The downloadable archive contains source files without Git internals. To publish a downloaded copy, initialize Git and attach the intended remote. No public repository URL has been created or assumed.
+## Source and reproducible environment
+Canonical repository: https://github.com/mpgibb/roster-allocation
+
+Imported from `Michael_Gibb_Research_Starters.zip` on 2026-09-28. The archive contained no Git internals; the first commit preserves the provided starter. Archive SHA-256: `2195ca960288b3fc54d0920c782a1645fdd7b9a03f371f2ecd6ed27aa926eee2`.
+
+Each starter uses its own `research` package. Keep separate virtual environments; do not install the four packages into one environment.
+
+For a fully locked Python 3.11 environment, use uv 0.12.19:
+
+```bash
+uv sync --frozen --extra api --python 3.11
+uv run --frozen --extra api python -m unittest discover -s tests -v
+uv run --frozen --extra api uvicorn research.api:app --host 127.0.0.1 --port 8000
+```
+
+`requirements-api.lock` is retained from the supplied archive. `uv.lock` is the canonical complete resolution for development and CI. When changing dependencies, update the lock and rerun the tests. The standard pip instructions above remain available.
 
 ## Authorship and review
 Initial scaffold and baseline code generated with Codex assistance from a design discussion with Gemini. Michael's technical review and project-specific research are still required before this represents completed portfolio work.
 
 ## License
-No open-source license is selected. Choose a license before public distribution; dataset rights must be assessed separately.
+No open-source license has been granted. Source is published for inspection; public availability does not grant reuse rights. Michael may choose a license later. Dataset rights must be assessed separately.

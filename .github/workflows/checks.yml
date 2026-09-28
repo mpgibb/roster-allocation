@@ -7,9 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v6
         with:
-          python-version: '3.11'
-      - run: python -m pip install -r requirements-api.lock
-      - run: python -m pip install -e '.[api]'
-      - run: python -m unittest discover -s tests -v
+          version: '0.12.19'
+      - run: uv sync --frozen --extra api --python 3.11
+      - run: uv run --frozen --extra api python -m unittest discover -s tests -v
